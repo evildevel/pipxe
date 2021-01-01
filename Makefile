@@ -1,3 +1,5 @@
+SHELL 		:= /bin/bash
+
 FW_URL		:= https://github.com/raspberrypi/firmware/branches/stable/boot
 
 EFI_BUILD	:= RELEASE
@@ -5,15 +7,15 @@ EFI_ARCH	:= AARCH64
 EFI_TOOLCHAIN	:= GCC5
 EFI_TIMEOUT	:= 3
 EFI_FLAGS	:= --pcd=PcdPlatformBootTimeOut=$(EFI_TIMEOUT)
-EFI_DSC		:= edk2-platforms/Platform/RaspberryPi/RPi3/RPi3.dsc
-EFI_FD		:= Build/RPi3/$(EFI_BUILD)_$(EFI_TOOLCHAIN)/FV/RPI_EFI.fd
+EFI_DSC		:= edk2-platforms/Platform/RaspberryPi/RPi4/RPi4.dsc
+EFI_FD		:= Build/RPi4/$(EFI_BUILD)_$(EFI_TOOLCHAIN)/FV/RPI_EFI.fd
 
 IPXE_CROSS	:= aarch64-linux-gnu-
 IPXE_SRC	:= ipxe/src
 IPXE_TGT	:= bin-arm64-efi/rpi.efi
 IPXE_EFI	:= $(IPXE_SRC)/$(IPXE_TGT)
 
-SDCARD_MB	:= 32
+SDCARD_MB	:= 128
 export MTOOLSRC	:= mtoolsrc
 
 all : sdcard sdcard.img sdcard.zip
@@ -34,7 +36,7 @@ efi-basetools : submodules
 	$(MAKE) -C edk2/BaseTools
 
 $(EFI_FD) : submodules efi-basetools
-	. ./edksetup.sh && \
+	bash ./edksetup.sh && \
 	build -b $(EFI_BUILD) -a $(EFI_ARCH) -t $(EFI_TOOLCHAIN) \
 		-p $(EFI_DSC) $(EFI_FLAGS)
 

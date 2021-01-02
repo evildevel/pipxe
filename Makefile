@@ -21,7 +21,7 @@ export MTOOLSRC	:= mtoolsrc
 all : sdcard sdcard.img sdcard.zip
 
 submodules :
-	git submodule update --init --recursive
+	#git submodule update --init --recursive
 
 firmware :
 	if [ ! -e firmware ] ; then \
@@ -43,7 +43,7 @@ $(EFI_FD) : submodules efi-basetools
 ipxe : $(IPXE_EFI)
 
 $(IPXE_EFI) : submodules
-	$(MAKE) -C $(IPXE_SRC) CROSS=$(IPXE_CROSS) CONFIG=rpi $(IPXE_TGT)
+	$(MAKE) -C $(IPXE_SRC) CROSS=$(IPXE_CROSS) CONFIG=rpi $(IPXE_TGT) EMBED=demo.ipxe
 
 sdcard : firmware efi ipxe
 	$(RM) -rf sdcard

@@ -1,0 +1,15 @@
+gcc: error: unrecognized command line option ‘-mlittle-endian’; did you mean ‘-fconvert=little-endian’?
+  [DEPS] core/dummy_sanboot.c
+gcc: error: unrecognized command line option ‘-mlittle-endian’; did you mean ‘-fconvert=little-endian’?
+  [BUILD] bin-arm64-efi/embedded.o
+gcc: error: unrecognized command line option ‘-mlittle-endian’; did you mean ‘-fconvert=little-endian’?
+make: *** [Makefile.housekeeping:946: bin-arm64-efi/embedded.o] Error 1
+evildevel@evildevel-pc:~/rpi/pipxe/ipxe/src$ export CROSS_COMPILE=aarch64-linux-gnu-
+evildevel@evildevel-pc:~/rpi/pipxe/ipxe/src$ make bin-arm64-efi/rpi.efi EMBED=demo.ipxe
+  [BUILD] bin-arm64-efi/embedded.o
+  [AR] bin-arm64-efi/blib.a
+aarch64-linux-gnu-ar: creating bin-arm64-efi/blib.a
+  [VERSION] bin-arm64-efi/version.rpi.efi.o
+  [LD] bin-arm64-efi/rpi.efi.tmp
+  [FINISH] bin-arm64-efi/rpi.efi
+rm bin-arm64-efi/version.rpi.efi.o

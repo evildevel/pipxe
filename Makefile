@@ -36,7 +36,7 @@ efi-basetools : submodules
 	$(MAKE) -C edk2/BaseTools
 
 $(EFI_FD) : submodules efi-basetools
-	bash ./edksetup.sh && \
+	. ./edksetup.sh && \
 	build -b $(EFI_BUILD) -a $(EFI_ARCH) -t $(EFI_TOOLCHAIN) \
 		-p $(EFI_DSC) $(EFI_FLAGS)
 
